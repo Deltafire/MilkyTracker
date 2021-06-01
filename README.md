@@ -19,3 +19,8 @@ of MilkyTracker.
 
 [INSTALL.md]:INSTALL.md
 [docs/readme_unix]:docs/readme_unix
+
+Packaging status
+================
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/milkytracker.svg)](https://repology.org/project/milkytracker/versions)
