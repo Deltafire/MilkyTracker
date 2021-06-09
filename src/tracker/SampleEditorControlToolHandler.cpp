@@ -153,6 +153,7 @@ bool SampleEditorControl::invokeToolParameterDialog(SampleEditorControl::ToolHan
 		case ToolHandlerResponder::SampleToolTypeGenerateSquare:
 		case ToolHandlerResponder::SampleToolTypeGenerateTriangle:
 		case ToolHandlerResponder::SampleToolTypeGenerateSawtooth:
+		case ToolHandlerResponder::SampleToolTypeGenerateHalfSine:
 		{
 			dialog = new DialogWithValues(parentScreen, toolHandlerResponder, PP_DEFAULT_ID, "Generate waveform" PPSTR_PERIODS, DialogWithValues::ValueStyleEnterTwoValues);
 			static_cast<DialogWithValues*>(dialog)->setValueOneCaption("Volume in percent:");
@@ -331,6 +332,18 @@ bool SampleEditorControl::invokeTool(ToolHandlerResponder::SampleToolTypes type)
 			sampleEditor->tool_generateSawtooth(&par);
 			break;
 		}
+
+		case ToolHandlerResponder::SampleToolTypeGenerateHalfSine:
+		{
+			lastValues.waveFormVolume = static_cast<DialogWithValues*>(dialog)->getValueOne();
+			lastValues.waveFormNumPeriods = static_cast<DialogWithValues*>(dialog)->getValueTwo();
+			FilterParameters par(2);
+			par.setParameter(0, FilterParameters::Parameter(lastValues.waveFormVolume / 100.0f));
+			par.setParameter(1, FilterParameters::Parameter(lastValues.waveFormNumPeriods));
+			sampleEditor->tool_generateHalfSine(&par);
+			break;
+		}
+
 		default:
 			break;
 	}

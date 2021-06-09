@@ -154,6 +154,7 @@ SampleEditorControl::SampleEditorControl(pp_int32 id,
 	subMenuGenerators->addEntry("Square" PPSTR_PERIODS, MenuCommandIDGenerateSquare);
 	subMenuGenerators->addEntry("Triangle" PPSTR_PERIODS, MenuCommandIDGenerateTriangle);
 	subMenuGenerators->addEntry("Sawtooth" PPSTR_PERIODS, MenuCommandIDGenerateSawtooth);
+	subMenuGenerators->addEntry("Half Sine" PPSTR_PERIODS, MenuCommandIDGenerateHalfSine);
 	subMenuGenerators->addEntry("Silence" PPSTR_PERIODS, MenuCommandIDGenerateSilence);
 	
 	// build context menu
@@ -1705,6 +1706,7 @@ void SampleEditorControl::invokeContextMenu(const PPPoint& p, bool translatePoin
 	subMenuGenerators->setState(MenuCommandIDGenerateSquare, isEmptySample);
 	subMenuGenerators->setState(MenuCommandIDGenerateTriangle, isEmptySample);
 	subMenuGenerators->setState(MenuCommandIDGenerateSawtooth, isEmptySample);
+	subMenuGenerators->setState(MenuCommandIDGenerateHalfSine, isEmptySample);
 	subMenuGenerators->setState(MenuCommandIDGenerateSilence, isEmptySample);
 
 	parentScreen->setContextMenuControl(editMenuControl);
@@ -1876,6 +1878,10 @@ void SampleEditorControl::executeMenuCommand(pp_int32 commandId)
 
 		case MenuCommandIDGenerateSawtooth:
 			invokeToolParameterDialog(ToolHandlerResponder::SampleToolTypeGenerateSawtooth);
+			break;
+
+		case MenuCommandIDGenerateHalfSine:
+			invokeToolParameterDialog(ToolHandlerResponder::SampleToolTypeGenerateHalfSine);
 			break;
 
 	}

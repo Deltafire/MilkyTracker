@@ -2914,6 +2914,57 @@ void SampleEditor::tool_generateSawtooth(const FilterParameters* par)
 	postFilter();
 }
 
+void SampleEditor::tool_generateHalfSine(const FilterParameters* par)
+{
+	if (isEmptySample())
+		return;
+
+	pp_int32 sStart = selectionStart;
+	pp_int32 sEnd = selectionEnd;
+
+	if (hasValidSelection())
+	{
+		if (sStart >= 0 && sEnd >= 0)
+		{
+			if (sEnd < sStart)
+			{
+				pp_int32 s = sEnd; sEnd = sStart; sStart = s;
+			}
+		}
+	}
+	else
+	{
+		sStart = 0;
+		sEnd = sample->samplen;
+	}
+
+	preFilter(&SampleEditor::tool_generateHalfSine, par);
+
+	mp_sint32 sLen = sEnd - sStart;
+
+	prepareUndo();
+
+	pp_int32 i;
+
+	const float numPeriods = (float)(6.283185307179586476925286766559 * par->getParameter(1).floatPart);
+	const float amplify = par->getParameter(0).floatPart;
+
+	// generate half sine wave here
+	for (i = sStart; i < sEnd / 2; i++)
+	{
+		float per = (i - sStart) / (float)sLen * numPeriods;
+		setFloatSampleInWaveform(i, (float)sin(per) * amplify);
+	}
+	for (i = sEnd / 2; i < sEnd; i++)
+	{
+		setFloatSampleInWaveform(i, 0);
+	}
+
+	finishUndo();
+
+	postFilter();
+}
+
 bool SampleEditor::tool_canApplyLastFilter() const
 {
 	return lastFilterFunc != NULL && isValidSample(); 

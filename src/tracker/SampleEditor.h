@@ -350,6 +350,7 @@ public:
 	void tool_generateSquare(const FilterParameters* par);
 	void tool_generateTriangle(const FilterParameters* par);
 	void tool_generateSawtooth(const FilterParameters* par);
+	void tool_generateHalfSine(const FilterParameters* par);
 
 	void tool_applyLastFilter();
 	bool tool_canApplyLastFilter() const;
