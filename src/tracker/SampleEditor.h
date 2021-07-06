@@ -329,6 +329,7 @@ public:
 	// filters 
 	void tool_scaleSample(const FilterParameters* par);
 	void tool_normalizeSample(const FilterParameters* par);
+	void tool_compressSample(const FilterParameters* par);
 	void tool_reverseSample(const FilterParameters* par);
 	void tool_PTboostSample(const FilterParameters* par);
 	bool isValidxFadeSelection();

@@ -119,6 +119,7 @@ SampleEditorControl::SampleEditorControl(pp_int32 id,
 	subMenuAdvanced->addEntry("Volume boost" PPSTR_PERIODS, MenuCommandIDVolumeBoost);
 	subMenuAdvanced->addEntry("Volume fade" PPSTR_PERIODS, MenuCommandIDVolumeFade);
 	subMenuAdvanced->addEntry("Normalize", MenuCommandIDNormalize);
+	subMenuAdvanced->addEntry("Compress", MenuCommandIDCompress);
 	subMenuAdvanced->addEntry(seperatorStringLarge, -1);
 	subMenuAdvanced->addEntry("Backwards", MenuCommandIDReverse);
 	subMenuAdvanced->addEntry("Cross-fade", MenuCommandIDXFade);
@@ -1677,6 +1678,7 @@ void SampleEditorControl::invokeContextMenu(const PPPoint& p, bool translatePoin
 	
 	// update submenu states
 	subMenuAdvanced->setState(MenuCommandIDNormalize, isEmptySample);
+	subMenuAdvanced->setState(MenuCommandIDCompress, isEmptySample);
 	subMenuAdvanced->setState(MenuCommandIDVolumeFade, isEmptySample);
 	subMenuAdvanced->setState(MenuCommandIDVolumeBoost, isEmptySample);
 	subMenuAdvanced->setState(MenuCommandIDReverse, isEmptySample);
@@ -1808,6 +1810,10 @@ void SampleEditorControl::executeMenuCommand(pp_int32 commandId)
 
 		case MenuCommandIDNormalize:
 			sampleEditor->tool_normalizeSample(NULL);
+			break;
+
+		case MenuCommandIDCompress:
+			sampleEditor->tool_compressSample(NULL);
 			break;
 
 		case MenuCommandIDReverse:

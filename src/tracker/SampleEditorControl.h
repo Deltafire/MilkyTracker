@@ -281,6 +281,7 @@ private:
 		MenuCommandIDPHPaste,
 		MenuCommandIDFLPaste,
 		MenuCommandIDNormalize,
+		MenuCommandIDCompress,
 		MenuCommandIDVolumeBoost,
 		MenuCommandIDVolumeFade,
 		MenuCommandIDReverse,
