@@ -580,6 +580,8 @@ private:
     void eventKeyDownBinding_DecCurOrderPattern();
     void eventKeyDownBinding_IncCurOrderPattern();
 
+	void eventKeyDownBinding_InvokePatternCapture();
+
 
 private:
 	// - friend classes --------------------------------------------------------
@@ -609,6 +611,7 @@ private:
 	friend class RecorderLogic;
 	friend class Zapper;
 	friend class SectionSwitcher;
+	friend class SampleEditorControl;
 };
 
 #endif

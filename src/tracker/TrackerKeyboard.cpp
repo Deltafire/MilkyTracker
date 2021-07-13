@@ -171,6 +171,9 @@ void Tracker::initKeyBindings()
 	eventKeyDownBindingsMilkyTracker->addBinding(VK_DECIMAL, 0, &Tracker::eventKeyDownBinding_InvokeQuickChooseInstrument);	
 	eventKeyDownBindingsMilkyTracker->addBinding(VK_DIVIDE, 0, &Tracker::eventKeyDownBinding_InvokeQuickChooseInstrument);	
 
+	eventKeyDownBindingsMilkyTracker->addBinding('V', KeyModifierCTRL | KeyModifierSHIFT, &Tracker::eventKeyDownBinding_InvokePatternCapture);
+
+
 	// Key-down bindings for Fasttracker
 	// tab stuff
 	eventKeyDownBindingsFastTracker->addBinding('T', KeyModifierCTRL|KeyModifierSHIFT, &Tracker::eventKeyDownBinding_OpenTab);
@@ -260,6 +263,8 @@ void Tracker::initKeyBindings()
     eventKeyDownBindingsFastTracker->addBinding(VK_F10, KeyModifierCTRL, &Tracker::eventKeyDownBinding_InsNewOrderPosition);
     eventKeyDownBindingsFastTracker->addBinding(VK_F11, KeyModifierCTRL, &Tracker::eventKeyDownBinding_DecCurOrderPattern);
     eventKeyDownBindingsFastTracker->addBinding(VK_F12, KeyModifierCTRL, &Tracker::eventKeyDownBinding_IncCurOrderPattern);
+
+	eventKeyDownBindingsFastTracker->addBinding('V', KeyModifierCTRL|KeyModifierSHIFT, &Tracker::eventKeyDownBinding_InvokePatternCapture);
 
 	eventKeyDownBindings = eventKeyDownBindingsMilkyTracker;
 }
@@ -1005,4 +1010,15 @@ void Tracker::eventKeyDownBinding_IncCurOrderPattern()
 {
 	moduleEditor->increaseOrderPosition(getOrderListBoxIndex());
 	updateOrderlist();
+}
+
+void Tracker::eventKeyDownBinding_InvokePatternCapture()
+{
+	sectionHDRecorder->selectSampleOutput();
+	sectionHDRecorder->smpIndex = moduleEditor->currentSampleIndex;
+	sectionHDRecorder->insIndex = moduleEditor->currentInstrumentIndex;
+	sectionHDRecorder->fromOrder = getOrderListBoxIndex();
+	sectionHDRecorder->toOrder = getOrderListBoxIndex();
+  sectionHDRecorder->setSettingsAllowMuting(true);
+	sectionHDRecorder->exportWAVAsSample();
 }
